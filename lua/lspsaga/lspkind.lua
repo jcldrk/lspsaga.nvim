@@ -74,8 +74,8 @@ end
 local kind = ui.use_nerd and get_kind() or {}
 
 local function get_kind_icon(idx)
-  if not kind[idx] then
-    if ui.use_nerd then
+  if not idx or not kind[idx] then
+    if ui.use_nerd and idx then
       vim.notify_once(('%d is missing in kind'):format(idx), vim.log.levels.WARN, {})
     end
     return { '', '' }
