@@ -224,8 +224,11 @@ local function init_winbar(buf)
     pattern = 'SagaSymbolUpdate',
     callback = function(opt)
       local curbuf = api.nvim_get_current_buf()
+      local buftype = vim.bo[opt.buf].buftype
       if
-        vim.bo[opt.buf].buftype == 'nofile'
+        buftype == 'nofile'
+        or buftype == 'quickfix'
+        or buftype == 'qf'
         or curbuf ~= opt.data.bufnr
         or #opt.data.symbols == 0
       then
